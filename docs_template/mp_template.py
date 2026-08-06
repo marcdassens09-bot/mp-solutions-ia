@@ -34,6 +34,9 @@ MARGIN_BOTTOM = 25 * mm
 # Chemin du logo — à adapter si tu déplaces le fichier
 LOGO_PATH = os.path.join(os.path.dirname(__file__), "logo_complet.png")
 
+# Icône ronde (nouveau logo), utilisée uniquement dans le header de la page 1
+LOGO_ICONE_PATH = os.path.join(os.path.dirname(__file__), "logo_icone.jpg")
+
 # ─────────────────────────────────────────────
 # STYLES TYPOGRAPHIQUES
 # ─────────────────────────────────────────────
@@ -44,7 +47,7 @@ def get_styles():
             fontName="Helvetica-Bold",
             fontSize=18,
             textColor=VERT_FONCE,
-            spaceAfter=6,
+            spaceAfter=10,
             alignment=TA_LEFT,
         ),
         "sous_titre": ParagraphStyle(
@@ -52,7 +55,7 @@ def get_styles():
             fontName="Helvetica",
             fontSize=11,
             textColor=ORANGE,
-            spaceAfter=10,
+            spaceAfter=16,
             alignment=TA_LEFT,
         ),
         "section": ParagraphStyle(
@@ -60,8 +63,8 @@ def get_styles():
             fontName="Helvetica-Bold",
             fontSize=12,
             textColor=VERT,
-            spaceBefore=12,
-            spaceAfter=4,
+            spaceBefore=22,
+            spaceAfter=8,
             alignment=TA_LEFT,
         ),
         "corps": ParagraphStyle(
@@ -69,8 +72,8 @@ def get_styles():
             fontName="Helvetica",
             fontSize=10,
             textColor=GRIS_TEXTE,
-            leading=15,
-            spaceAfter=6,
+            leading=17,
+            spaceAfter=10,
             alignment=TA_LEFT,
         ),
         "corps_bold": ParagraphStyle(
@@ -93,31 +96,31 @@ def get_styles():
 # ─────────────────────────────────────────────
 # HEADER avec logo
 # ─────────────────────────────────────────────
-def draw_header(c, doc):
+def draw_header(c, doc, first_page=False):
     c.saveState()
 
     # Bande verte foncée en haut
     c.setFillColor(VERT_FONCE)
     c.rect(0, H - 28*mm, W, 28*mm, fill=1, stroke=0)
 
-    # Logo complet (icône + texte blanc)
-    if os.path.exists(LOGO_PATH):
-        logo_w = 110 * mm
-        logo_h = 26 * mm
+    # Logo complet désactivé : le fichier logo_complet.png est corrompu
+    # (mélangé avec un autre document, cf. mémoire projet). En attendant un
+    # fichier propre, on garde le texte de secours seul.
+    c.setFillColor(BLANC)
+    c.setFont("Helvetica-Bold", 15)
+    c.drawString(MARGIN_LEFT, H - 12*mm, "MP Solutions IA")
+
+    # Icône ronde — uniquement en page 1, coin supérieur droit du bandeau
+    if first_page and os.path.exists(LOGO_ICONE_PATH):
+        icone_size = 12 * mm
         c.drawImage(
-            LOGO_PATH,
-            MARGIN_LEFT,
-            H - 26*mm,
-            width=logo_w,
-            height=logo_h,
-            mask="auto",
+            LOGO_ICONE_PATH,
+            W - MARGIN_RIGHT - icone_size,
+            H - 2*mm - icone_size,
+            width=icone_size,
+            height=icone_size,
             preserveAspectRatio=True,
         )
-    else:
-        # Fallback texte si logo absent
-        c.setFillColor(BLANC)
-        c.setFont("Helvetica-Bold", 15)
-        c.drawString(MARGIN_LEFT, H - 12*mm, "MP Solutions IA")
 
     # Coordonnées à droite
     c.setFont("Helvetica", 7.5)
@@ -127,7 +130,7 @@ def draw_header(c, doc):
         "Artigat — 09130 Ariège",
         "contact@mpsolutionsia.fr",
     ]
-    y_contact = H - 9*mm
+    y_contact = H - 16*mm if first_page else H - 9*mm
     for line in contact_lines:
         c.drawRightString(W - MARGIN_RIGHT, y_contact, line)
         y_contact -= 4.5*mm
@@ -140,33 +143,26 @@ def draw_header(c, doc):
     c.restoreState()
 
 # ─────────────────────────────────────────────
-# FOOTER
+# NUMÉRO DE PAGE
 # ─────────────────────────────────────────────
-def draw_footer(c, doc):
+def draw_page_number(c, doc):
     c.saveState()
-
-    c.setStrokeColor(VERT)
-    c.setLineWidth(0.8)
-    c.line(MARGIN_LEFT, 18*mm, W - MARGIN_RIGHT, 18*mm)
-
     c.setFont("Helvetica", 7.5)
     c.setFillColor(colors.HexColor("#888888"))
-    c.drawString(MARGIN_LEFT, 13*mm, "MP Solutions IA — Micro-entreprise — contact@mpsolutionsia.fr")
-
     c.drawRightString(W - MARGIN_RIGHT, 13*mm, f"Page {doc.page}")
-
-    c.setFillColor(ORANGE)
-    c.circle(W/2, 13*mm + 1.5*mm, 1.5*mm, fill=1, stroke=0)
-
     c.restoreState()
 
 # ─────────────────────────────────────────────
 # CONSTRUCTION DU DOCUMENT
 # ─────────────────────────────────────────────
 def build_document(output_path, title, subtitle, content_story):
-    def on_page(c, doc):
-        draw_header(c, doc)
-        draw_footer(c, doc)
+    def on_first_page(c, doc):
+        draw_header(c, doc, first_page=True)
+        draw_page_number(c, doc)
+
+    def on_later_pages(c, doc):
+        draw_header(c, doc, first_page=False)
+        draw_page_number(c, doc)
 
     doc = SimpleDocTemplate(
         output_path,
@@ -186,7 +182,7 @@ def build_document(output_path, title, subtitle, content_story):
     story.append(HRFlowable(width="100%", thickness=1, color=GRIS_CLAIR, spaceAfter=8))
     story += content_story
 
-    doc.build(story, onFirstPage=on_page, onLaterPages=on_page)
+    doc.build(story, onFirstPage=on_first_page, onLaterPages=on_later_pages)
     print(f"✅ PDF généré : {output_path}")
 
 
@@ -203,14 +199,14 @@ if __name__ == "__main__":
             "et les petites entreprises. Notre approche : écouter d'abord, proposer ensuite.",
             S["corps"]
         ),
-        Spacer(1, 6*mm),
+        Spacer(1, 12*mm),
 
         Paragraph("Ce que nous proposons", S["section"]),
         Paragraph("• Chatbot IA personnalisé à votre activité", S["corps"]),
         Paragraph("• Intégration sur votre site WordPress ou vitrine", S["corps"]),
         Paragraph("• Disponible 24h/24 pour répondre à vos clients", S["corps"]),
         Paragraph("• Accompagnement complet, sans jargon", S["corps"]),
-        Spacer(1, 6*mm),
+        Spacer(1, 12*mm),
 
         Paragraph("Tarifs", S["section"]),
         Table(
@@ -233,7 +229,7 @@ if __name__ == "__main__":
                 ("LEFTPADDING",    (0,0), (-1,-1), 6),
             ])
         ),
-        Spacer(1, 8*mm),
+        Spacer(1, 16*mm),
         Paragraph(
             "Document confidentiel — MP Solutions IA — contact@mpsolutionsia.fr",
             S["mention"]
