@@ -12,6 +12,7 @@ from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, HRFlowable
 )
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
+from reportlab.pdfgen.canvas import Canvas
 import os
 
 # ─────────────────────────────────────────────
@@ -143,26 +144,45 @@ def draw_header(c, doc, first_page=False):
     c.restoreState()
 
 # ─────────────────────────────────────────────
-# NUMÉRO DE PAGE
+# NUMÉRO DE PAGE — format « x/y » (page courante / total)
 # ─────────────────────────────────────────────
-def draw_page_number(c, doc):
-    c.saveState()
-    c.setFont("Helvetica", 7.5)
-    c.setFillColor(colors.HexColor("#888888"))
-    c.drawRightString(W - MARGIN_RIGHT, 13*mm, f"Page {doc.page}")
-    c.restoreState()
+# ReportLab ne connaît le nombre total de pages qu'une fois le document entier
+# construit : on bufferise chaque page dans showPage() et on n'écrit le numéro
+# qu'au moment de save(), quand le total est enfin connu (technique standard
+# dite "NumberedCanvas").
+class NumberedCanvas(Canvas):
+    def __init__(self, *args, **kwargs):
+        Canvas.__init__(self, *args, **kwargs)
+        self._saved_page_states = []
+
+    def showPage(self):
+        self._saved_page_states.append(dict(self.__dict__))
+        self._startPage()
+
+    def save(self):
+        total_pages = len(self._saved_page_states)
+        for state in self._saved_page_states:
+            self.__dict__.update(state)
+            self._draw_page_number(total_pages)
+            Canvas.showPage(self)
+        Canvas.save(self)
+
+    def _draw_page_number(self, total_pages):
+        self.saveState()
+        self.setFont("Helvetica", 7.5)
+        self.setFillColor(colors.HexColor("#888888"))
+        self.drawRightString(W - MARGIN_RIGHT, 13*mm, f"{self._pageNumber}/{total_pages}")
+        self.restoreState()
 
 # ─────────────────────────────────────────────
 # CONSTRUCTION DU DOCUMENT
 # ─────────────────────────────────────────────
-def build_document(output_path, title, subtitle, content_story):
+def build_document(output_path, title, subtitle, content_story, show_page_number=True):
     def on_first_page(c, doc):
         draw_header(c, doc, first_page=True)
-        draw_page_number(c, doc)
 
     def on_later_pages(c, doc):
         draw_header(c, doc, first_page=False)
-        draw_page_number(c, doc)
 
     doc = SimpleDocTemplate(
         output_path,
@@ -182,8 +202,13 @@ def build_document(output_path, title, subtitle, content_story):
     story.append(HRFlowable(width="100%", thickness=1, color=GRIS_CLAIR, spaceAfter=8))
     story += content_story
 
-    doc.build(story, onFirstPage=on_first_page, onLaterPages=on_later_pages)
-    print(f"✅ PDF généré : {output_path}")
+    doc.build(
+        story,
+        onFirstPage=on_first_page,
+        onLaterPages=on_later_pages,
+        canvasmaker=NumberedCanvas if show_page_number else Canvas,
+    )
+    print(f"PDF généré : {output_path}")
 
 
 # ─────────────────────────────────────────────
