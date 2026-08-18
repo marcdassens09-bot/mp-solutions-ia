@@ -32,11 +32,8 @@ MARGIN_RIGHT  = 20 * mm
 MARGIN_TOP    = 42 * mm
 MARGIN_BOTTOM = 25 * mm
 
-# Chemin du logo — à adapter si tu déplaces le fichier
-LOGO_PATH = os.path.join(os.path.dirname(__file__), "logo_complet.png")
-
-# Icône ronde (nouveau logo), utilisée uniquement dans le header de la page 1
-LOGO_ICONE_PATH = os.path.join(os.path.dirname(__file__), "logo_icone.jpg")
+# Logo complet (icône + texte + slogan), fond transparent — remplace le texte de secours
+LOGO_PATH = os.path.join(os.path.dirname(__file__), "logo_complet_transparent.png")
 
 # ─────────────────────────────────────────────
 # STYLES TYPOGRAPHIQUES
@@ -104,24 +101,24 @@ def draw_header(c, doc, first_page=False):
     c.setFillColor(VERT_FONCE)
     c.rect(0, H - 28*mm, W, 28*mm, fill=1, stroke=0)
 
-    # Logo complet désactivé : le fichier logo_complet.png est corrompu
-    # (mélangé avec un autre document, cf. mémoire projet). En attendant un
-    # fichier propre, on garde le texte de secours seul.
-    c.setFillColor(BLANC)
-    c.setFont("Helvetica-Bold", 15)
-    c.drawString(MARGIN_LEFT, H - 12*mm, "MP Solutions IA")
-
-    # Icône ronde — uniquement en page 1, coin supérieur droit du bandeau
-    if first_page and os.path.exists(LOGO_ICONE_PATH):
-        icone_size = 12 * mm
+    # Logo complet (icône + "MP Solutions IA" + slogan), fond transparent
+    if os.path.exists(LOGO_PATH):
+        logo_height = 14 * mm
+        logo_width = logo_height * (1853 / 215)  # ratio réel du fichier
         c.drawImage(
-            LOGO_ICONE_PATH,
-            W - MARGIN_RIGHT - icone_size,
-            H - 2*mm - icone_size,
-            width=icone_size,
-            height=icone_size,
+            LOGO_PATH,
+            MARGIN_LEFT,
+            H - 28*mm + (28*mm - logo_height) / 2,
+            width=logo_width,
+            height=logo_height,
             preserveAspectRatio=True,
+            mask="auto",
         )
+    else:
+        # Filet de sécurité si le fichier venait à manquer
+        c.setFillColor(BLANC)
+        c.setFont("Helvetica-Bold", 15)
+        c.drawString(MARGIN_LEFT, H - 12*mm, "MP Solutions IA")
 
     # Coordonnées à droite
     c.setFont("Helvetica", 7.5)
