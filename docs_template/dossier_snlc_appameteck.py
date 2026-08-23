@@ -52,7 +52,9 @@ contenu = [
     ),
     Paragraph("++ CE QUE JE PROPOSE", S["section"]),
     Paragraph(
-        "Un chatbot IA disponible en continu, capable de présenter votre matériel de sono et "
+        "Je n'installe pas seulement un chatbot : j'intègre l'IA dans votre relation "
+        "client pour digitaliser ce qui vous prend du temps, en commençant par un "
+        "chatbot disponible en continu, capable de présenter votre matériel de sono et "
         "d'éclairage, de répondre aux questions courantes sur les tarifs et la disponibilité, "
         "et de collecter la demande complète (date, lieu, matériel souhaité) avant même que "
         "vous ne rappeliez — pour ne plus perdre de demande reçue un soir de événement.",
@@ -71,8 +73,7 @@ contenu = [
 
     Paragraph("-> MP Solutions IA", S["section"]),
     Paragraph(
-        "Marc-Paul Dassens — mpsolutionsia@gmail.com — Artigat (09130)<br/>"
-        "\u00abÉcouter, comprendre, servir — en toute transparence.\u00bb",
+        "Marc-Paul Dassens — mpsolutionsia@gmail.com — Artigat (09130)",
         S["corps"]
     ),
 ]

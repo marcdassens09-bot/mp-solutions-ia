@@ -45,34 +45,19 @@ contenu = [
 
     Paragraph("++ CE QUE JE PROPOSE", S["section"]),
     Paragraph(
-        "Un chatbot IA intégré à fumeco.fr, disponible en continu, capable de répondre "
-        "aux questions les plus fréquentes de vos trois publics et d'orienter chaque "
-        "visiteur vers le bon contact commercial — distribution, chantier, ou standard.",
+        "Je n'installe pas seulement un chatbot : j'intègre l'IA dans votre relation client "
+        "pour digitaliser ce qui vous prend du temps aujourd'hui, en commençant par un "
+        "chatbot intégré à fumeco.fr, disponible en continu, capable de répondre aux "
+        "questions les plus fréquentes de vos trois publics et d'orienter chaque visiteur "
+        "vers le bon contact commercial — distribution, chantier, ou standard.",
         S["corps"]
     ),
     Spacer(1, 5*mm),
-    Table(
-        [
-            ["Prestation", "Détail", "Tarif"],
-            ["Installation", "Chatbot personnalisé + intégration fumeco.fr", "1 200 €"],
-            ["Suivi mensuel", "Maintenance, mises à jour, ajustements", "120 € / mois"],
-        ],
-        colWidths=[45*mm, 85*mm, 40*mm],
-        style=TableStyle([
-            ("BACKGROUND",     (0,0), (-1,0), VERT),
-            ("TEXTCOLOR",      (0,0), (-1,0), BLANC),
-            ("FONTNAME",       (0,0), (-1,0), "Helvetica-Bold"),
-            ("FONTSIZE",       (0,0), (-1,-1), 9),
-            ("ROWBACKGROUNDS", (0,1), (-1,-1), [BLANC, GRIS_CLAIR]),
-            ("GRID",           (0,0), (-1,-1), 0.5, colors.HexColor("#DDDDDD")),
-            ("VALIGN",         (0,0), (-1,-1), "MIDDLE"),
-            ("TOPPADDING",     (0,0), (-1,-1), 5),
-            ("BOTTOMPADDING",  (0,0), (-1,-1), 5),
-            ("LEFTPADDING",    (0,0), (-1,-1), 6),
-        ])
+    Paragraph(
+        "Ce document est une première approche, sans tarif ni engagement : l'objectif "
+        "est d'abord de voir ensemble si l'idée vous parle.",
+        S["corps"]
     ),
-    Spacer(1, 4*mm),
-    Paragraph("Engagement minimum : 3 mois.", S["corps"]),
     Spacer(1, 5*mm),
     Paragraph("Financements à vérifier", S["corps_bold"]),
     Paragraph(
@@ -136,8 +121,7 @@ contenu = [
     Spacer(1, 8*mm),
     Paragraph("-> MP Solutions IA", S["section"]),
     Paragraph(
-        "Marc-Paul Dassens — mpsolutionsia@gmail.com — Artigat (09130)<br/>"
-        "\u00abÉcouter, comprendre, servir — en toute transparence.\u00bb",
+        "Marc-Paul Dassens — mpsolutionsia@gmail.com — Artigat (09130)",
         S["corps"]
     ),
 ]

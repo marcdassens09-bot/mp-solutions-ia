@@ -53,10 +53,12 @@ contenu = [
     ),
     Paragraph("++ CE QUE JE PROPOSE", S["section"]),
     Paragraph(
-        "Un chatbot IA disponible en continu, capable de répondre aux questions courantes sur "
-        "vos horaires, votre offre de location de ski et vos disponibilités, et d'orienter "
-        "chaque visiteur vers le bon magasin — pour ne plus perdre de clientèle touristique en "
-        "dehors des heures d'ouverture.",
+        "Je n'installe pas seulement un chatbot : j'intègre l'IA dans votre relation client "
+        "pour digitaliser ce qui vous prend du temps aujourd'hui, en commençant par un "
+        "chatbot disponible en continu, capable de répondre aux questions courantes sur vos "
+        "horaires, votre offre de location de ski et vos disponibilités, et d'orienter chaque "
+        "visiteur vers le bon magasin — pour ne plus perdre de clientèle touristique en dehors "
+        "des heures d'ouverture.",
         S["corps"]
     ),
     Spacer(1, 4*mm),
@@ -72,8 +74,7 @@ contenu = [
 
     Paragraph("-> MP Solutions IA", S["section"]),
     Paragraph(
-        "Marc-Paul Dassens — mpsolutionsia@gmail.com — Artigat (09130)<br/>"
-        "\u00abÉcouter, comprendre, servir — en toute transparence.\u00bb",
+        "Marc-Paul Dassens — mpsolutionsia@gmail.com — Artigat (09130)",
         S["corps"]
     ),
 ]

@@ -56,35 +56,20 @@ contenu = [
 
     Paragraph("++ CE QUE JE PROPOSE", S["section"]),
     Paragraph(
-        "Un chatbot IA intégré à votre présence en ligne, disponible en continu, capable "
+        "Je n'installe pas seulement un chatbot : j'intègre l'IA dans votre relation "
+        "client pour digitaliser ce qui vous prend du temps, en commençant par un "
+        "chatbot intégré à votre présence en ligne, disponible en continu, capable "
         "de répondre aux questions courantes sur vos prestations, votre certification RGE "
         "et vos délais, et de qualifier chaque demande avant de vous la transmettre — pour "
         "que votre temps sur chantier ne coûte plus de devis.",
         S["corps"]
     ),
     Spacer(1, 3*mm),
-    Table(
-        [
-            ["Prestation", "Détail", "Tarif"],
-            ["Installation", "Chatbot personnalisé + intégration", "1 200 €"],
-            ["Suivi mensuel", "Maintenance, mises à jour, ajustements", "120 € / mois"],
-        ],
-        colWidths=[45*mm, 85*mm, 40*mm],
-        style=TableStyle([
-            ("BACKGROUND",     (0,0), (-1,0), VERT),
-            ("TEXTCOLOR",      (0,0), (-1,0), BLANC),
-            ("FONTNAME",       (0,0), (-1,0), "Helvetica-Bold"),
-            ("FONTSIZE",       (0,0), (-1,-1), 9),
-            ("ROWBACKGROUNDS", (0,1), (-1,-1), [BLANC, GRIS_CLAIR]),
-            ("GRID",           (0,0), (-1,-1), 0.5, colors.HexColor("#DDDDDD")),
-            ("VALIGN",         (0,0), (-1,-1), "MIDDLE"),
-            ("TOPPADDING",     (0,0), (-1,-1), 5),
-            ("BOTTOMPADDING",  (0,0), (-1,-1), 5),
-            ("LEFTPADDING",    (0,0), (-1,-1), 6),
-        ])
+    Paragraph(
+        "Ce document est une première approche, sans tarif ni engagement : l'objectif "
+        "est d'abord de voir ensemble si l'idée vous parle.",
+        S["corps"]
     ),
-    Spacer(1, 3*mm),
-    Paragraph("Engagement minimum : 3 mois.", S["corps"]),
     Spacer(1, 4*mm),
 
     Paragraph("Financements à vérifier", S["corps_bold"]),
@@ -99,8 +84,7 @@ contenu = [
 
     Paragraph("-> MP Solutions IA", S["section"]),
     Paragraph(
-        "Marc-Paul Dassens — mpsolutionsia@gmail.com — Artigat (09130)<br/>"
-        "\u00abÉcouter, comprendre, servir — en toute transparence.\u00bb",
+        "Marc-Paul Dassens — mpsolutionsia@gmail.com — Artigat (09130)",
         S["corps"]
     ),
 ]
