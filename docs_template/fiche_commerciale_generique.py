@@ -99,6 +99,7 @@ contenu = [
     ),
     Paragraph("• Visite sur place — écoute — compréhension de l'activité.", S["corps"]),
     Paragraph("• Construction de l'outil à son image.", S["corps"]),
+    Paragraph("• Pas de site web ? J'en crée un, pensé pour accueillir l'agent.", S["corps"]),
     Paragraph("• Un interlocuteur humain après — pas un ticket.", S["corps"]),
 
     Paragraph(">> CE QUE J'OBSERVE", S["section"]),
@@ -143,6 +144,10 @@ contenu = [
             [Paragraph("Évolue avec vous", S["cell_label"]),
              Paragraph("Nouveau produit, nouvelle question fréquente : l'agent "
              "s'actualise, il ne reste pas figé au jour de sa mise en ligne.", S["cell_corps"])],
+            [Paragraph("Site web inclus si besoin", S["cell_label"]),
+             Paragraph("Vous n'avez pas encore de site ? Je vous en crée un, pensé "
+             "pour accueillir l'agent — pas besoin de chercher un prestataire à part.",
+             S["cell_corps"])],
         ],
         colWidths=[45*mm, 125*mm],
         style=TableStyle([
@@ -177,8 +182,8 @@ contenu = [
     Paragraph(
         "1. On échange sur votre activité — vos questions fréquentes, votre ton, vos "
         "clients. 2. Je construis l'agent à votre image, pas un modèle générique. "
-        "3. Mise en ligne sur votre site. 4. Suivi mensuel : ajustements, mises à jour, "
-        "évolutions.",
+        "3. Mise en ligne sur votre site — je peux aussi vous en créer un si vous n'en "
+        "avez pas encore. 4. Suivi mensuel : ajustements, mises à jour, évolutions.",
         S["corps"]
     ),
 
