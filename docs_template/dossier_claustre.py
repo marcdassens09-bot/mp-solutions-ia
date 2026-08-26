@@ -49,6 +49,12 @@ contenu = [
         "jusqu'à vous, et vous transmet uniquement les contacts sérieux.",
         S["corps"]
     ),
+    Paragraph(
+        "Si vous préférez un vrai site plutôt qu'une page de contact simple, "
+        "je peux aussi vous en construire un complet — on en discute selon "
+        "vos besoins.",
+        S["corps"]
+    ),
     Spacer(1, 5*mm),
 
     Paragraph(">> CONFORMITÉ — CE QUE DIT LA LOI DEPUIS LE 2 AOÛT 2026", S["section"]),

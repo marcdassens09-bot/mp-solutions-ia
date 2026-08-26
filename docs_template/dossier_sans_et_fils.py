@@ -47,6 +47,12 @@ contenu = [
         "attendre qu'un site complet soit terminé.",
         S["corps"]
     ),
+    Paragraph(
+        "Si vous préférez repartir directement sur un vrai site complet "
+        "plutôt que sur ce support léger, je peux aussi vous en construire "
+        "un — on en discute selon vos besoins.",
+        S["corps"]
+    ),
     Spacer(1, 5*mm),
 
     Paragraph(">> CONFORMITÉ — CE QUE DIT LA LOI DEPUIS LE 2 AOÛT 2026", S["section"]),

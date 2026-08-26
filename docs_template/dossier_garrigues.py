@@ -34,7 +34,7 @@ contenu = [
         "et seulement à vos heures d'ouverture.",
         S["corps"]
     ),
-    Spacer(1, 4*mm),
+    Spacer(1, 2*mm),
 
     Paragraph("++ CE QUE JE PROPOSE", S["section"]),
     Paragraph(
@@ -49,7 +49,11 @@ contenu = [
         "page générique du réseau AD, sur un support que vous contrôlez.",
         S["corps"]
     ),
-    Spacer(1, 5*mm),
+    Paragraph(
+        "Vous préférez un vrai site ? Je peux aussi vous en construire un.",
+        S["corps"]
+    ),
+    Spacer(1, 2*mm),
 
     Paragraph(">> CONFORMITÉ — CE QUE DIT LA LOI DEPUIS LE 2 AOÛT 2026", S["section"]),
     Paragraph(
@@ -62,7 +66,7 @@ contenu = [
         "rien à votre place — il informe et oriente vers vous pour le reste.",
         S["corps"]
     ),
-    Spacer(1, 4*mm),
+    Spacer(1, 2*mm),
 
     Paragraph("Sécurité et données", S["corps_bold"]),
     Paragraph(
