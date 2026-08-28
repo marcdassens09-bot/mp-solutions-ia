@@ -172,8 +172,8 @@ contenu = [
         "trompe-l'œil (obligation légale respectée dès la conception). "
         "• Les données sensibles tapées par erreur (carte bancaire, email, téléphone) "
         "sont automatiquement masquées avant d'être conservées. "
-        "• Protection anti-abus intégrée (limite de requêtes, détection de tentatives "
-        "de détournement). "
+        "• Protection anti-abus intégrée : limite de requêtes, et le bot est instruit "
+        "pour refuser toute manipulation et ne jamais révéler ses consignes. "
         "• Connexion sécurisée (HTTPS), conformité RGPD dès la mise en service.",
         S["corps"]
     ),
