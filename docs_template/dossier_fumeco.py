@@ -121,7 +121,7 @@ contenu = [
     Spacer(1, 8*mm),
     Paragraph("-> MP Solutions IA", S["section"]),
     Paragraph(
-        "Marc-Paul Dassens — mpsolutionsia@gmail.com — Artigat (09130)",
+        "Marc-Paul Dassens — contact@mpsolutionsia.fr — Artigat (09130)",
         S["corps"]
     ),
 ]
